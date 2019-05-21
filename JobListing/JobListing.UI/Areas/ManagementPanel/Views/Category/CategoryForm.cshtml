@@ -1,0 +1,19 @@
+﻿@model JobListing.Entities.Category
+@{
+    ViewBag.Title = "CategoryForm";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Category Form</h2>
+<hr />
+<br />
+@using (Html.BeginForm("Save","Category",FormMethod.Post))
+{
+@Html.HiddenFor(x=>x.CategoryId)
+    <div class="form-group">
+        @Html.LabelFor(x=>x.CategoryName)
+        @Html.TextBoxFor(x=>x.CategoryName,new { @class="form-control"})
+    </div>
+    <button type="submit" class="btn btn-success">SAVE</button>
+}
+

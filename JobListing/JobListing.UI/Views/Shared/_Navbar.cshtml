@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+<nav id="nav-menu-container">
+
+
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <ul class="nav-menu">
+                @Html.AntiForgeryToken()
+                <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("AboutUs", "Home")">About Us</a></li>
+                <li><a href="@Url.Action("List", "Jobs")">Jobs</a></li>
+                <li><a href="@Url.Action("Blog", "Home")">Blog</a></li>
+                <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a class="btn btn-outline-light" href="/ManagementPanel/Dashboard/Index">Admin Panel</a></li>
+                }
+                <li><a class="ticker-btn" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
+            </ul>
+        }
+    }
+    else
+
+    {
+        <ul class="nav-menu">
+            <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li><a href="@Url.Action("AboutUs", "Home")">About Us</a></li>
+            <li><a href="@Url.Action("List", "Jobs")">Jobs</a></li>
+            <li><a href="@Url.Action("Blog", "Home")">Blog</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+            <li><a class="ticker-btn" href="/Account/Register">SignUp</a></li>
+            <li><a class="ticker-btn" href="/Account/Login">Login</a></li>
+        </ul>
+    }
+
+</nav>

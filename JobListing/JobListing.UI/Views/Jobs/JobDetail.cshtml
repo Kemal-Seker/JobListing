@@ -1,0 +1,57 @@
+﻿@model JobListing.UI.ViewModels.JobViewModel
+@{
+    ViewBag.Title = "JobDetail";
+    Layout = "~/Views/Shared/_JobListingLayout.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />  
+<div class="container">
+    <h2><b> @Model.job.Company.CompanyName / @Model.job.JobDescriptionTitle </b></h2>
+    <div class="row">
+        <div class="col-lg-3">
+            <hr />
+            <br />
+            @if (Model.job.Company.Logo != null)
+            {
+                string imageBase64 = Convert.ToBase64String(Model.job.Company.Logo);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                <img src="@imageSrc" class="rounded-bottom" width="250" height="250" />
+            }
+        </div>
+
+        <div class="col-lg-9">
+            <hr />
+            <br />
+            <h4>ID : <mark>@Model.job.JobId</mark></h4>
+            <hr />
+            <br />
+            <h4>Company Name : <mark>@Model.job.Company.CompanyName</mark></h4>
+            <hr />
+            <br />
+            <h4>Job Nature : <mark>@Model.job.JobNature</mark></h4>
+            <hr />
+            <br />
+            <h4>Salary : <mark>@string.Format("{0:0}", Model.job.SalaryMin) - @string.Format("{0:0}", Model.job.SalaryMax) TL</mark></h4>
+            <br />
+            <hr />
+            <br />
+        </div>
+    </div>
+    <div class="jumbotron">
+        <h1 class="display-4" style="text-align:center;font-family:Calibri"> - @Model.job.JobDescriptionTitle - </h1>
+        <br />
+        <p class="lead">@Model.job.JobDescriptionBody</p>
+        <hr class="my-4">
+        <p>@Model.job.Company.Address</p>
+    </div>
+    <a href="/Jobs/List" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<br />
+<hr />
+<br />

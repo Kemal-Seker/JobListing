@@ -1,0 +1,55 @@
+﻿@model JobListing.UI.ViewModels.JobViewModel
+@{
+    ViewBag.Title = "JobForm";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Job Form</h2>
+<hr />
+<br />
+@using (Html.BeginForm("Save", "Job", FormMethod.Post, new { @style = "width:40%" }))
+{
+    @Html.HiddenFor(x => x.job.JobId)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.CompanyId)
+        @Html.DropDownListFor(x => x.job.CompanyId, new SelectList(Model.companies, "CompanyId", "CompanyName"), "--Select Company--", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.Title)
+        @Html.TextBoxFor(x => x.job.Title, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.JobNature)
+        @Html.EnumDropDownListFor(x => x.job.JobNature, "--Select Job Nature--", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.SalaryMin)
+        @Html.TextBoxFor(x => x.job.SalaryMin, new { @class = "form-control", type = "number" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.SalaryMax)
+        @Html.TextBoxFor(x => x.job.SalaryMax, new { @class = "form-control", type = "number" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.JobDescriptionTitle)
+        @Html.TextBoxFor(x => x.job.JobDescriptionTitle, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.job.JobDescriptionBody)
+        @Html.TextAreaFor(x => x.job.JobDescriptionBody, new { @class = "form-control" })
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-success">SAVE</button>
+    <br />
+    <hr />
+    <br />
+}
+

@@ -1,0 +1,93 @@
+﻿@model List<JobListing.Entities.Job>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_JobListingLayout.cshtml";
+}
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Best Jobs Ever
+                </h1>
+                <p class="text-white link-nav"><a href="@Url.Action("Index","Home")">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="@Url.Action("List","Job")"> Job List</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-12 post-list">
+                @foreach (var item in Model)
+                {
+                    <div class="single-post d-flex flex-row">
+                        <div class="thumb">
+                            @if (item.Company.Logo != null)
+                            {
+                                string imageBase64 = Convert.ToBase64String(item.Company.Logo);
+                                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                                <img src="@imageSrc" class="rounded-bottom" width="180" height="180" />
+                            }
+                            <ul class="tags">
+                                <li>
+                                    <a href="#">Art</a>
+                                </li>
+                                <li>
+                                    <a href="#">Media</a>
+                                </li>
+                                <li>
+                                    <a href="#">Design</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="details">
+                            <div class="title d-flex flex-row justify-content-between">
+                                <div class="titles">
+                                    <a href="/Jobs/JobDetail/@item.JobId"><h4>@item.JobDescriptionTitle</h4></a>
+                                    <h6>@item.Company.CompanyName</h6>
+                                </div>
+                                <ul class="btns">
+                                    <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
+                                    <li><a href="#">Apply</a></li>
+                                </ul>
+                            </div>
+                            <p>
+                                @item.JobDescriptionTitle
+                            </p>
+                            <h5>Job Nature : @item.JobNature</h5>
+                            <p class="address"><span class="lnr lnr-map"></span> @item.Company.Address - @item.Company.City.CityName</p>
+                            <p class="address"><span class="lnr lnr-database"></span>  @string.Format("{0:0}", item.SalaryMin) - @string.Format("{0:0}", item.SalaryMax) TL</p>
+                        </div>
+                    </div>
+                }
+                <a href="/Jobs/List"  class="btn btn-outline-primary">Back to List</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End post Area -->
+<!-- Start callto-action Area -->
+<section class="callto-action-area section-gap">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content col-lg-9">
+                <div class="title text-center">
+                    <h1 class="mb-10 text-white">Join us today without any hesitation</h1>
+                    <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                    <a class="primary-btn" href="#">I am a Candidate</a>
+                    <a class="primary-btn" href="#">Request Free Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End calto-action Area -->

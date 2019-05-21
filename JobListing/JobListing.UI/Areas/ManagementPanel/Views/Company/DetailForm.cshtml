@@ -1,0 +1,40 @@
+﻿@model JobListing.UI.ViewModels.CompanyViewModel
+@{
+    ViewBag.Title = "DetailForm";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2><b>@Model.company.CompanyName </b><i>Detail Form</i></h2>
+<div class="row">
+    <div class="col-lg-3">
+        <hr />
+        <br />
+        @if (Model.company.Logo != null)
+        {
+            string imageBase64 = Convert.ToBase64String(Model.company.Logo);
+            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+            <img src="@imageSrc" class="rounded-bottom" width="250" height="250" />
+        }
+    </div>
+
+    <div class="col-lg-9">
+        <hr />
+        <br />
+        <h4>ID : <mark>@Model.company.CompanyId</mark></h4>
+        <hr />
+        <br />
+        <h4>Name : <mark>@Model.company.CompanyName</mark></h4>
+        <hr />
+        <br />
+        <h4>City : <mark>@Model.company.City.CityName</mark></h4>
+        <hr />
+        <br />
+        <h4>Address : <mark>@Model.company.Address</mark></h4>
+        <hr />
+        <br />
+    </div>
+</div>
+
+<a href="/ManagementPanel/Company/Index" class="btn btn-outline-dark">Back to List</a>
+

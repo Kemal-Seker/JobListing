@@ -1,0 +1,35 @@
+﻿@model JobListing.UI.ViewModels.CompanyViewModel
+@{
+    ViewBag.Title = "CompanyForm";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Company Form</h2>
+<hr />
+<br />
+
+@using (Html.BeginForm("Save", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.company.CompanyId)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.company.CompanyName)
+        @Html.TextBoxFor(x => x.company.CompanyName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.company.Address)
+        @Html.TextAreaFor(x => x.company.Address, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.company.CityId)
+        @Html.DropDownListFor(x => x.company.CityId, new SelectList(Model.cities, "CityId", "CityName"), "--Select City--", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.company.Logo)
+        <input type="file" name="Foto" id="Foto" accept="image/*;capture=camera">
+    </div>
+    <button type="submit" class="btn btn-success">SAVE</button>
+}
+

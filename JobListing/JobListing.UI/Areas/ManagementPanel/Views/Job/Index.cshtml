@@ -1,0 +1,70 @@
+﻿@model List<JobListing.Entities.Job>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+<style>
+    #hoverTable:hover {
+        background-color: red;
+    }
+</style>
+<h2>Job List</h2>
+<hr />
+<br />
+<table id="hoverTable" class="table table-dark table-bordered table-hover" style="background-color:black;text-align:center;">
+    <thead>
+        <tr>
+            <th>Job Detail</th>
+            <th>Company</th>
+            <th>Job Nature</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="hoverTable">
+                <td style="text-align:center"><a style="color:aliceblue" href="/ManagementPanel/Job/Detail/@item.JobId"><i style="font-size:40px;" class="fas fa-user-secret"></i></a></td>
+                @if (item.Company.Logo != null)
+                {
+                    string imageBase64 = Convert.ToBase64String(item.Company.Logo);
+                    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                    <td style="text-align:left"> <img src="@imageSrc" width="40" height="40" />   @item.Company.CompanyName</td>
+                }
+                <td>@item.JobNature</td>
+                <td>@item.JobDescriptionTitle</td>
+                @if (item.JobDescriptionBody.Length < 20)
+                {
+                    <td>@item.JobDescriptionBody</td>
+                }
+                else
+                {
+                    <td>@item.JobDescriptionBody.Substring(0, 20)...</td>
+                }
+
+                <td><a href="/ManagementPanel/Job/Edit/@item.JobId" class="btn btn-info">Edit</a></td>
+                <td><a href="/ManagementPanel/Job/Delete/@item.JobId" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a href="/ManagementPanel/Job/New" class="btn btn-primary">New Job</a>
+<br />
+<hr />
+<script>
+    $(document).ready(function () {
+        $('#hoverTable').DataTable();
+    });</script>

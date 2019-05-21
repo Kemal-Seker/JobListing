@@ -1,0 +1,44 @@
+﻿@model JobListing.UI.ViewModels.UserwithRoleViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-bordered table-danger" style="width:90%">
+            <thead>
+                <tr>
+                    <th style="text-align:center">Admin Table</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Admins)
+                {
+                    <tr>
+                        <td>@user.Username / @user.Email - (@user.Phone) | @user.Roles</td>
+                  
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <table class="table table-bordered table-dark" style="width:90%">
+            <thead>
+                <tr>
+                    <th style="text-align:center">User Table</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Username / @user.Email - (@user.Phone) | @user.Roles</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

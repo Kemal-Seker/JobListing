@@ -1,0 +1,70 @@
+﻿@model List<JobListing.Entities.Company>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+<h2>Company List</h2>
+<hr />
+<br />
+
+<table class="table table-bordered table-hover" id="myTable2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Logo</th>
+            <th>Company Name</th>
+            <th>City</th>
+            <th>Address</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CompanyId</td>
+                @if (item.Logo != null)
+                {
+                    string imageBase64 = Convert.ToBase64String(item.Logo);
+                    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                    <td style="text-align:center"> <img src="@imageSrc" class="rounded-circle" width="60" height="60" /></td>
+                }
+                <td><a href="/ManagementPanel/Company/Detail/@item.CompanyId">@item.CompanyName</a></td>
+                <td>@item.City.CityName</td>
+                <td>@item.Address</td>
+                <td><a href="/ManagementPanel/Company/Edit/@item.CompanyId" class="btn btn-info">Edit</a></td>
+                <td><a href="/ManagementPanel/Company/Delete/@item.CompanyId" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a href="/ManagementPanel/Company/New" class="btn btn-primary">New Company</a>
+<script>
+    $(document).ready(function () {
+        $('#myTable2').DataTable();
+    });</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

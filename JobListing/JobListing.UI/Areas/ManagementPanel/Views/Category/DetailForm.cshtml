@@ -1,0 +1,18 @@
+﻿@model JobListing.Entities.Category
+@{
+    ViewBag.Title = "DetailForm";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2><b>@Model.CategoryName </b><i>Detail Form</i></h2>
+<hr />
+<br />
+<h4>ID : <mark>@Model.CategoryId</mark></h4>
+<hr />
+<br />
+<h4>Name : <mark>@Model.CategoryName</mark></h4>
+<hr />
+<br />
+<a href="/ManagementPanel/Category/Index" class="btn btn-outline-dark">Back to List</a>
+
+
